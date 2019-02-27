@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import kotlinx.android.synthetic.main.animal_list_item.view.*
 
@@ -37,12 +38,20 @@ class AnimalAdapter(private val items: ArrayList<String>, private val context: C
     class MyViewHolder (view: View, context: Context, items: ArrayList<String>) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each animal to
         var tvAnimalType: TextView = view.tv_animal_type
+        val animalButton: Button = view.animal_button
 
         init {
             tvAnimalType.setOnClickListener {
                 val intent = Intent(context , ThirdActivity::class.java)
                 intent.putExtra(ThirdActivity.TYPE, items[adapterPosition])
                 intent.putExtra(ThirdActivity.POSITION, adapterPosition)
+
+                startActivity(context, intent, null)
+            }
+
+            animalButton.setOnClickListener {
+                val intent = Intent(context, AnimalActivity::class.java)
+                intent.putExtra(AnimalActivity.TYPE_ONLY, items[adapterPosition])
 
                 startActivity(context, intent, null)
             }
